@@ -1,0 +1,17 @@
+# ---------- Python ----------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+.venv/
+.ipynb_checkpoints
+
+# ---------- C# / .NET ----------
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.pdb
