@@ -13,4 +13,4 @@ The app compiles a corpus of documents such as this one (using the `os` library)
 
 The system uses **TF-IDF vectorization** to create a multidimensional vector space representing the repository corpus. **Cosine similatiry** is then used to match user queries against this space, returning the most relevant projects.
 
-The app is built with `streamlit` and runs on a local server, allowing users to access it through their browser.
+The app is hosted on `Streamlit` and can be accessed at: https://portfolio-search.streamlit.app/
