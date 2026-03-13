@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 import pandas as pd
 import re
 
@@ -23,13 +23,14 @@ def load_documentation_files(repository_path: str = None) -> pd.DataFrame:
 
     projects = []
 
-    for project_folder in os.listdir(repository_path):
+    for project_folder in repository_path.iterdir():
+        if not project_folder.is_dir(): continue
         
-        documentation = os.path.join(repository_path, project_folder, "docs", "project-description.md")
-        readme = os.path.join(repository_path, project_folder, "README.md")
+        documentation = project_folder / "docs" / "project-description.md"
+        readme = project_folder / "README.md"
         
-        if os.path.isfile(documentation):
-            with open(documentation, "r", encoding="utf-8") as f:
+        if documentation.is_file():
+            with documentation.open("r", encoding="utf-8") as f:
                 lines = f.readlines()
 
                 if not lines: continue
@@ -38,8 +39,8 @@ def load_documentation_files(repository_path: str = None) -> pd.DataFrame:
                 description = clean_md("".join(lines[1:]).strip())
         else: continue
 
-        if os.path.isfile(readme):
-            with open(readme, "r", encoding="utf-8") as f:
+        if readme.is_file():
+            with readme.open("r", encoding="utf-8") as f:
                 lines = f.readlines()
 
                 if not lines: continue
@@ -87,22 +88,20 @@ def clean_md(text: str) -> str:
     return text.strip()
 
 
-def find_repository_path() -> str:
+def find_repository_path() -> Path:
     """
     Automatically finds the repository path by finding the current file's path and going up the folder structure until finding the "DS-ML" file.
 
     Returns
     -------
-    repository_path: str
+    repository_path: Path
         Path of the DS-ML repository.
     """
-    current_file = os.path.abspath(__file__)
-    current_path = os.path.dirname(current_file)
+    current_path = Path(__file__).resolve().parent
 
-    while os.path.basename(current_path) != "DS-ML":
-        parent = os.path.dirname(current_path)
-        if parent == current_path:
+    while current_path.name.upper() != "DS-ML":
+        if current_path.parent == current_path:
             raise FileNotFoundError("DS-ML folder not found in parent directories")
-        current_path = parent
+        current_path = current_path.parent
 
     return current_path
