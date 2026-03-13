@@ -99,7 +99,7 @@ def find_repository_path() -> Path:
     """
     current_path = Path(__file__).resolve().parent
 
-    while current_path.name.upper() != "DS-ML":
+    while current_path.name.upper() != "DS-ML-PORTFOLIO":
         if current_path.parent == current_path:
             raise FileNotFoundError("DS-ML folder not found in parent directories")
         current_path = current_path.parent
