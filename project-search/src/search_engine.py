@@ -1,6 +1,6 @@
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
-from preprocessing import preprocess_text
+from src.preprocessing import preprocess_text
 
 def search_projects(query: str, projects: pd.DataFrame, vectorizer, tfidf_matrix) -> pd.DataFrame:
     """
