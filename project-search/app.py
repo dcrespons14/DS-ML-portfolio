@@ -64,18 +64,73 @@ def format_result(project_name: str, project_folder: str, introduction: str, sni
     """
 
     html = f"""
-    <div style="margin-bottom:20px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; font-size:20px; font-weight:bold;">
-            <span style="color:#1a0dab;">{project_name}</span>
+    <style>
+    .project-container {{
+        margin-bottom:20px;
+        font-family: sans-serif;
+    }}
+    .project-header {{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        font-size:20px;
+        font-weight:bold;
+    }}
+    .project-name {{
+        color:#1a0dab;
+    }}
+    .project-link,
+    .project-link:link,
+    .project-link:visited,
+    .project-link:hover,
+    .project-link:active {{
+        color:#6c757d;
+        text-decoration:underline;
+        font-size:16px;
+        font-weight:normal;
+    }}
+    .project-intro {{
+        color:#4d5156;
+        font-size:16px;
+    }}
+    .project-snippet {{
+        color:#6c757d;
+        font-size:14px;
+        font-style:italic;
+    }}
+    .project-similarity {{
+        color:#4169e1;
+        font-size:14px;
+        text-align:right;
+    }}
+
+    /* Dark mode overrides */
+    @media (prefers-color-scheme: dark) {{
+        .project-name {{ color:#90bbff; }}
+        .project-link,
+        .project-link:link,
+        .project-link:visited,
+        .project-link:hover,
+        .project-link:active {{
+            color:#b0b0b0;
+        }}
+        .project-intro {{ color:#e0e0e0; }}
+        .project-snippet {{ color:#b0b0b0; }}
+        .project-similarity {{ color:#aaccff; }}
+    }}
+    </style>
+
+    <div class="project-container">
+        <div class="project-header">
+            <span class="project-name">{project_name}</span>
             <a href="https://github.com/dcrespons14/DS-ML-portfolio/tree/main/{project_folder}" 
-                style="color:#6c757d; text-decoration:underline; font-size:16px; font-weight:normal;" 
-                target="_blank">
-                GitHub Link
+            class="project-link" target="_blank">
+            GitHub Link
             </a>
         </div>
-        <div style="color:#4d5156; font-size:16px;">{introduction}</div>
-        <div style="color:#6c757d; font-size:14px;"><i>{snippet}</i></div>
-        <div style="color:#4169e1; font-size:14px; text-align:right;">{similarity}</div>
+        <div class="project-intro">{introduction}</div>
+        <div class="project-snippet">{snippet}</div>
+        <div class="project-similarity">{similarity}</div>
     </div>
     """
     return html
