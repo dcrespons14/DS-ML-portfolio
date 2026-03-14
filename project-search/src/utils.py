@@ -51,7 +51,8 @@ def load_documentation_files(repository_path: str = None) -> pd.DataFrame:
         projects.append({
             "project_name": project_name,
             "description": description,
-            "introduction": introduction
+            "introduction": introduction,
+            "folder": project_folder.name
         })
 
     return pd.DataFrame(projects)

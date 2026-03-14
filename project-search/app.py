@@ -39,7 +39,7 @@ def build_search_engine():
     return projects, vectorizer, tfidf_matrix
 
 
-def format_result(project_name: str, introduction: str, snippet: str, similarity: str) -> str:
+def format_result(project_name: str, project_folder: str, introduction: str, snippet: str, similarity: str) -> str:
     """
     Formats a project search result as HTML for display in Streamlit.
     
@@ -47,6 +47,8 @@ def format_result(project_name: str, introduction: str, snippet: str, similarity
     ----------
     project_name: str
         Project name.
+    project_folder: str
+        Project folder (used to generate a hyperlink to GitHub).
     introduction: str
         Project's introduction.
     snippet: str
@@ -63,7 +65,14 @@ def format_result(project_name: str, introduction: str, snippet: str, similarity
 
     html = f"""
     <div style="margin-bottom:20px;">
-        <div style="color:#1a0dab; font-size:20px; font-weight:bold;">{project_name}</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:20px; font-weight:bold;">
+            <span style="color:#1a0dab;">{project_name}</span>
+            <a href="https://github.com/dcrespons14/DS-ML-portfolio/tree/main/{project_folder}" 
+                style="color:#6c757d; text-decoration:underline; font-size:16px; font-weight:normal;" 
+                target="_blank">
+                GitHub Link
+            </a>
+        </div>
         <div style="color:#4d5156; font-size:16px;">{introduction}</div>
         <div style="color:#6c757d; font-size:14px;"><i>{snippet}</i></div>
         <div style="color:#4169e1; font-size:14px; text-align:right;">{similarity}</div>
@@ -213,6 +222,7 @@ def main():
                 st.markdown(
                     format_result(
                         row["project_name"],
+                        row["folder"],
                         format_introduction(row["introduction"], query),
                         description_snippet(row["description"], query),
                         f"Similarity score: {row.similarity * 100:.1f}%"
