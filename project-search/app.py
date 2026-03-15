@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from src.search_engine import search_projects
 from src.db import insert_query
 import re
+import os
 
 
 @st.cache_resource
@@ -289,7 +290,7 @@ def main():
             st.info("Sorry, no projects matched your search. You can try something else.")
 
         try:
-            insert_query(query, st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
+            insert_query(query, os.environ.get("SUPABASE_URL"), os.environ.get("SUPABASE_KEY"))
         except:
             pass  # Ignore errors if query can't be inserted
 

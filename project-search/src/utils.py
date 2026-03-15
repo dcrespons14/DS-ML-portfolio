@@ -91,18 +91,11 @@ def clean_md(text: str) -> str:
 
 def find_repository_path() -> Path:
     """
-    Automatically finds the repository path by finding the current file's path and going up the folder structure until finding the "DS-ML" file.
+    Automatically finds the repository path by finding the current file's path and going up the folder structure.
 
     Returns
     -------
     repository_path: Path
-        Path of the DS-ML repository.
+        Path of the DS-ML-portfolio repository.
     """
-    current_path = Path(__file__).resolve().parent
-
-    while current_path.name.upper() != "DS-ML-PORTFOLIO":
-        if current_path.parent == current_path:
-            raise FileNotFoundError("DS-ML folder not found in parent directories")
-        current_path = current_path.parent
-
-    return current_path
+    return Path(__file__).resolve().parent.parent.parent
