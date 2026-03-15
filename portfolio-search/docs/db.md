@@ -1,6 +1,6 @@
-# Project Search
+# Portfolio search
 
-## Database Documentation
+## Database documentation
 
 The Project Search application logs user queries to a PostgreSQL database hosted on Supabase.  
 This is used to gather feedback on how users interact with the search functionality.

@@ -252,7 +252,7 @@ def main():
         layout="wide"
     )
 
-    st.title("Project Search")
+    st.title("Portfolio Search")
     st.write("Search across portfolio documentation to find the most relevant projects using keywords (e.g., pandas, SQL, or neural network).")
 
     projects, vectorizer, tfidf_matrix = build_search_engine()
